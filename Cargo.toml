@@ -1,0 +1,28 @@
+[package]
+name = "stopssh"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+russh = { path = "russh/russh" }
+log = "0.4"
+fern = { version = "0.6", features = ["colored"] }
+tokio = { version = "1", features = [
+    "rt-multi-thread",
+    "macros",
+    "sync",
+    "fs",
+] }
+clap = { version = "4", features = ["derive"] }
+toml = "0.8"
+serde = { version = "1", features = ["derive"] }
+humantime = "2"
+async-trait = "0.1"
+uuid = { version = "1", features = ["v4", "serde"] }
+serde_json = "1"
+base64 = "0.22"
+serde_with = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
