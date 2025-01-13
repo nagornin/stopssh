@@ -19,6 +19,14 @@ Options:
 
 Eached logged event has a session UUID associated with it. The timestamp is in milliseconds.
 
+## Building
+Clone the repository with submodules and build with `cargo`
+```
+$ git clone --recurse-submodules https://github.com/nagornin/stopssh
+$ cd stopssh
+$ cargo build --release
+```
+
 ## Example systemd unit
 ```ini
 [Unit]
