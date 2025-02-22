@@ -19,6 +19,13 @@ Options:
 
 Eached logged event has a session UUID associated with it. The timestamp is in milliseconds.
 
+## Converting to SQLite
+The `json2sql.py` script can convert some JSON logs to an SQLite database:
+```
+$ python3 json2sql.py ssh_logs.json ssh_logs.db
+```
+Also check out the `sql_scripts` folder.
+
 ## Building
 Clone the repository with submodules and build with `cargo`
 ```
