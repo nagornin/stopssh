@@ -26,6 +26,12 @@ $ python3 json2sql.py ssh_logs.json ssh_logs.db
 ```
 Also check out the `sql_scripts` folder.
 
+## Extract ips with failed logins to file
+
+```
+$ sqlite3 ssh_logs.db "SELECT DISTINCT substr(addr, 1, iif(instr(addr, ':') > 0, instr(addr, ':')- 1, NULL)) FROM sessions WHERE id In (SELECT password_auth.session_id FROM password_auth WHERE sessions.id = password_auth.session_id);" > ssh_logs_ips.txt
+```
+
 ## Building
 Clone the repository with submodules and build with `cargo`
 ```
