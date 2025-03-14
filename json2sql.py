@@ -8,9 +8,10 @@ parser.add_argument(metavar="JSON_IN_PATH",
                     help="Path to JSON log file",
                     dest="in_path")
 
-parser.add_argument(metavar="SQLITE_OUT_PATH",
-                    help="Where to save the SQLite database with exported logs",
-                    dest="out_path")
+parser.add_argument(
+    metavar="SQLITE_OUT_PATH",
+    help="Where to save the SQLite database with exported logs",
+    dest="out_path")
 
 args = parser.parse_args()
 in_file = open(args.in_path)
@@ -39,18 +40,21 @@ for line in in_file:
 
     match event["type"]:
         case "tcp_connection":
-            db.execute("INSERT OR IGNORE INTO sessions(id, time, addr) VALUES (?, ?, ?)",
-                       (log["session_id"], log["time"], data["addr"]))
+            db.execute(
+                "INSERT OR IGNORE INTO sessions(id, time, addr) VALUES (?, ?, ?)",
+                (log["session_id"], log["time"], data["addr"]))
 
         case "version":
-            db.execute("""INSERT OR IGNORE INTO clients(session_id, time, version) VALUES
+            db.execute(
+                """INSERT OR IGNORE INTO clients(session_id, time, version) VALUES
                        (?, ?, ?)""",
-                       (log["session_id"], log["time"], data["version"]))
+                (log["session_id"], log["time"], data["version"]))
 
         case "password_auth":
-            db.execute("""INSERT OR IGNORE INTO password_auth(session_id, time, user,
+            db.execute(
+                """INSERT OR IGNORE INTO password_auth(session_id, time, user,
                        password) VALUES (?, ?, ?, ?)""",
-                       (log["session_id"], log["time"], data["user"],
-                            data["password"]))
+                (log["session_id"], log["time"], data["user"],
+                 data["password"]))
 
 db.commit()
