@@ -39,16 +39,16 @@ for line in in_file:
 
     match event["type"]:
         case "tcp_connection":
-            db.execute("INSERT INTO sessions(id, time, addr) VALUES (?, ?, ?)",
+            db.execute("INSERT OR IGNORE INTO sessions(id, time, addr) VALUES (?, ?, ?)",
                        (log["session_id"], log["time"], data["addr"]))
 
         case "version":
-            db.execute("""INSERT INTO clients(session_id, time, version) VALUES
+            db.execute("""INSERT OR IGNORE INTO clients(session_id, time, version) VALUES
                        (?, ?, ?)""",
                        (log["session_id"], log["time"], data["version"]))
 
         case "password_auth":
-            db.execute("""INSERT INTO password_auth(session_id, time, user,
+            db.execute("""INSERT OR IGNORE INTO password_auth(session_id, time, user,
                        password) VALUES (?, ?, ?, ?)""",
                        (log["session_id"], log["time"], data["user"],
                             data["password"]))
