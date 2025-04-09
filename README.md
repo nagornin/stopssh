@@ -93,3 +93,6 @@ WantedBy=default.target
   }
 }
 ```
+
+## See also
+[Cowrie](https://github.com/cowrie/cowrie)
